@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Student Application Page</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<style>
+		.navbar-default {
+			background-color: #8f2313;
+			border-color: #8f2313;
+			color: white;
+		}
+		.navbar-default .navbar-brand {
+			font-family: lora;
+			color: #ffd58c;
+		}
+		.navbar-default .navbar-nav > li > a {
+			font-family: lora;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Boston College</a>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">TA Application</a></li>
+					<li><a href="#">Page 1</a></li>
+					<li><a href="#">Page 2</a></li>
+					<li><a href="#">Page 3</a></li>
+				</ul>
+			</div>
+
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Back</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<h1 class="text-center">Teaching Assistant Application</h1>
+				<hr>
+				<form>
+					<div class="form-group">
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Select Course
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-header">Only Applicable Courses will be shown</li>
+								<li><a href="#">CSCI3224</a></li>
+								<li><a href="#">CSCI7463</a></li>
+								<li><a href="#">CSCI1234</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="name">Full Name:</label>
+						<input type="text" class="form-control" id="name" placeholder="Enter your full name">
+					</div>
+					<div class="form-group">
+						<label for="email">Email address:</label>
+						<input type="email" class="form-control" id="email" placeholder="Enter email">
+					</div>
+					<div class="form-group">
+						<label for="student_id">Student ID:</label>
+						<input type="text" class="form-control" id="student_id" placeholder="Enter your student ID">
+					</div>
+					<div class="form-group">
+						<label for="experience">Previous Experience:</label>
+						<textarea class="form-control" id="experience" rows="5" placeholder="Please describe any relevant experience"></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
