@@ -1,0 +1,1 @@
+course = Course(CourseID="3356",Name="Software Engineering",Instructor="Marques Samary, Maria R",SeatData="42/30 Registered",Rooms="245 Beacon Street 229",Times="10:00-10:50 AM M W F")

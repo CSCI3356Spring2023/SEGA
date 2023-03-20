@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Summary</h1>
+
+<ul>
+  {% for x in mycourses %}
+    <li>{{ x.CourseID }} {{ x.Name }} {{ x.Instructor }} {{ x.SeatData }} {{ x.Rooms }} {{ x.Times }}</li>
+  {% endfor %}
+</ul>
+
+</body>
+</html>
