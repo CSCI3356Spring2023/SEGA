@@ -7,7 +7,6 @@ from .models import Course
 # DataFlair
 
 class CourseAdminForm(forms.ModelForm):
-    
     class Meta:
         model = Course
         fields = ('Name', 'CourseID', 'Instructor', 'SeatData', 'Rooms', 'Times')
