@@ -1,4 +1,6 @@
 from django.db import models
+from django import forms
+from django.forms import ModelForm
 
 class Course(models.Model):
     CourseID    = models.CharField(max_length=255)
@@ -28,10 +30,10 @@ class Account(models.Model):
     lastname = models.CharField(max_length=64)
     bcemail = models.CharField(max_length=64, unique=True)
     password = models.CharField(max_length=64)
-    permissions = models.CharField(max_length=16, choices=PERMISSIONS, default='Student')
+    # permissions = models.CharField(max_length=16, choices=PERMISSIONS, default='Student')
 
     def __str__(self):
-      return self.bcemail
+      return self.bc_email
 
 class Student(Account):
     YEAR_IN_SCHOOL = [
@@ -58,13 +60,13 @@ class Student(Account):
     work = models.CharField(max_length=16, choices=OPEN_TO_WORK, default='NO')
 
     def __str__(self):
-      return self.bcemail
+      return self.bc_email
 
 class Instructor(Account):
     position = models.CharField(max_length=255) # e.g CS Professor
 
     def __str__(self):
-      return self.bcemail
+      return self.bc_email
 
 class Admin(Account):
     # inherited from Account
@@ -76,4 +78,4 @@ class Admin(Account):
     positions = models.CharField(max_length=255) # e.g IT Admin
 
     def __str__(self):
-      return self.bcemail
+      return self.BC_Email

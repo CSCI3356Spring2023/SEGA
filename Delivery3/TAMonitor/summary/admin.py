@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import Group
-from .models import Course
+from .models import Course, Account, Student, Instructor, Admin
 
 # Register your models here.
 # DataFlair
@@ -18,5 +18,8 @@ class CourseAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Course, CourseAdmin)
+admin.site.register(Student)
+admin.site.register(Instructor)
+admin.site.register(Admin)
 admin.site.unregister(Group)
 admin.site.site_header = "Boston College"
