@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Course(models.Model):
     CourseID    = models.CharField(max_length=255)
@@ -18,6 +19,11 @@ class Course(models.Model):
       return self.Name
 
 class Account(models.Model):
+    user = models.OneToOneField(
+            User,
+            on_delete=models.CASCADE,
+            primary_key=True,
+    )
     PERMISSIONS = [
         ('STUDENT', 'Student'),
         ('INSTRUCTOR', 'Instructor'),

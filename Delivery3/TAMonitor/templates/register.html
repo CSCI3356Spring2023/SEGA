@@ -1,0 +1,23 @@
+{% block title %}Create an Account{% endblock %}
+
+{% block content %}
+    <form method="POST" class="form-group">
+        {% csrf_token %}       
+        <div class="form-group">
+            {{ form.firstname }}
+        </div>
+        <div class="form-group">
+            {{ form.lastname }}
+        </div>
+        <div class="form-group">
+            {{ form.bcemail }}
+        </div>
+        <div class="form-group">
+            {{ form.password }}
+        </div>
+        <div class="form-group">
+            {{ form.permissions }}
+        </div>
+        <button type="submit" class="btn btn-success">Register</button>
+    </form>
+{% endblock %}

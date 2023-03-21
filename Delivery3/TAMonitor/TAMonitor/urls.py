@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('summary.urls')),
     path('', include('createcourse.urls')),
     path('admin/', admin.site.urls),
+    path('register/', views.register, name='register'),
 ]
