@@ -69,8 +69,6 @@ TEMPLATES = [
     },
 ]
 
-print(os.path.join(BASE_DIR, 'templates'))
-
 WSGI_APPLICATION = 'TAMonitor.wsgi.application'
 
 
