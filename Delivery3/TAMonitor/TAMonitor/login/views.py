@@ -1,36 +1,10 @@
-# from django.http import HttpResponse
-# from django.shortcuts import render
-# from django.contrib.auth import authenticate, login
-# from . forms import RegisterForm
-# from summary.models import Account
-
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from django.contrib.auth.models import User
 
-def register(response):
-    form = RegisterForm(response.POST)
-    if response.method == 'POST':
-        form_class = RegisterForm(response.POST)
-        if form_class.is_valid():
-            account = form.save()
-            account.refresh_from_db()
-            account.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            account = authenticate(username=username, password=password)
-            login(response, account)
-
-            return redirect('/')
-
-        else:
-         form = RegisterForm()
-
-    return render(response, 'register.html', {'form': form})
-
-def register_view(request):
-    if (request.method == "POST"):
+def register_view(request): 
+    if (request.method == "POST"): 
         form = RegisterForm(request.Post)#Minji wrote response
         if form.is_valid():
             form.save()
@@ -41,7 +15,7 @@ def register_view(request):
             User.add(myRole)
             User.save()
             form.save()
-            if role == 'Student':
+            if role == 'Student': 
                 return redirect('/login')
 
     return render(request, 'login.html')
