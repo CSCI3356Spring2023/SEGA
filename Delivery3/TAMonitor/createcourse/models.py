@@ -9,9 +9,9 @@ class Course(models.Model):
     Rooms       = models.CharField(max_length=255)
     Times       = models.CharField(max_length=255)
     TAs = models.IntegerField(null=True)
-    WithDiscussion = models.BooleanField(null=True)
-    GradedInMeeting = models.BooleanField(null=True)
-    OfficeHours = models.CharField(max_length=255, null=True)
+    WithDiscussion = models.IntegerField(null=True)
+    GradedInMeeting = models.IntegerField(null=True)
+    OfficeHours = models.IntegerField(null=True)
     ExtraInfo   = models.CharField(max_length=2056, null=True)
 
     def __str__(self):

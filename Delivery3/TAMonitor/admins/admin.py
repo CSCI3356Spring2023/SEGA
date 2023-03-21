@@ -1,10 +1,10 @@
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import Group
-from summary.models import Course
+from summary.models import Course, Account, Student, Instructor, Admin
 
 class CourseAdminForm(forms.ModelForm):
-    
+
     class Meta:
         model = Course
         fields = ('Name', 'CourseID', 'Instructor', 'SeatData', 'Rooms', 'Times')
@@ -15,5 +15,8 @@ class CourseAdmin(admin.ModelAdmin):
     form = CourseAdminForm
 
 admin.site.register(Course, CourseAdmin)
+admin.site.register(Student)
+admin.site.register(Instructor)
+admin.site.register(Admin)
 admin.site.unregister(Group)
 admin.site.site_header = "Boston College"
