@@ -34,17 +34,20 @@ def studentregister(response):
     if response.method == 'POST':
         form_class = StudentRegisterForm(response.POST)
         if form_class.is_valid():
-            student_account = form.save()
-            student_account.refresh_from_db()
-            student_account.save()
+            account = form.save()
+            account.refresh_from_db()
+            account.save()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            student_account = authenticate(username=username, password=password)
+            account = authenticate(username=username, password=password)
             if account is not None:
-                login(response, student_account)
+                login(response, account)
+
             return redirect('/')
+
         else:
             form = StudentRegisterForm()
+
     return render(response, 'studentregister.html', {'form': form})
 
 

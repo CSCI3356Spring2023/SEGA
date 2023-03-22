@@ -67,13 +67,7 @@ class Instructor(Account):
       return self.bcemail
 
 class Admin(Account):
-    # inherited from Account
-    # firstname = models.CharField(max_length=64)
-    # lastname = models.CharField(max_length=64)
-    # bcemail = models.CharField(max_length=64)
-    # password = models.CharField(max_length=64)
-
-    positions = models.CharField(max_length=255) # e.g IT Admin
+    position = models.CharField(max_length=255) # e.g IT Admin
 
     def __str__(self):
       return self.bcemail

@@ -4,7 +4,6 @@ from summary.models import Account, Student, Instructor, Admin
 
 
 class RegisterForm(forms.ModelForm):
-    #username = forms.CharField(max_length=64)
     class Meta:
         model = Account
         fields = ["firstname", "lastname", "bcemail", "password", "permissions"]
@@ -35,7 +34,7 @@ class RegisterForm(forms.ModelForm):
 class StudentRegisterForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ["firstname", "lastname", "bcemail", "password", "year_in_school", "eagleid", "work"]
+        fields = ["firstname", "lastname", "bcemail", "password", "year_in_school", "major", "eagleid", "work"]
         widgets = {
             'firstname': TextInput(attrs={
                 'class': "form-control",
@@ -58,13 +57,18 @@ class StudentRegisterForm(forms.ModelForm):
                 'placeholder': 'Password'
                 }),
             'year_in_school': Select(),
+            'major': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Major'
+                }),
             'eagleid': TextInput(attrs={
                 'class': "form-control",
                 'style': 'max-width: 300px;',
                 'placeholder': 'EalgeID'
                 }),
             'work': Select(),
-                }
+        }
 
 class InstructorRegisterForm(forms.ModelForm):
     class Meta:
