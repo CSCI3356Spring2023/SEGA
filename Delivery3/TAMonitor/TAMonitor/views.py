@@ -6,7 +6,7 @@
 
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from .forms import RegisterForm
+from .forms import RegisterForm, InstructorRegisterForm, StudentRegisterForm
 from django.contrib.auth.models import User
 
 def register(response):
@@ -17,10 +17,10 @@ def register(response):
             account = form.save()
             account.refresh_from_db()
             account.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            account = authenticate(username=username, password=password)
-            login(response, account)
+            # username = form.cleaned_data.get('username')
+            # password = form.cleaned_data.get('password1')
+            # account = authenticate(username=username, password=password)
+            # login(response, account)
 
             return redirect('/')
 
@@ -28,6 +28,46 @@ def register(response):
          form = RegisterForm()
 
     return render(response, 'register.html', {'form': form})
+
+def studentregister(response):
+    form = StudentRegisterForm(response.POST)
+    if response.method == 'POST':
+        form_class = StudentRegisterForm(response.POST)
+        if form_class.is_valid():
+            student_account = form.save()
+            student_account.refresh_from_db()
+            student_account.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            student_account = authenticate(username=username, password=password)
+            if account is not None:
+                login(response, student_account)
+            return redirect('/')
+        else:
+            form = StudentRegisterForm()
+    return render(response, 'studentregister.html', {'form': form})
+
+
+def instructorregister(response):
+    form = InstructorRegisterForm(response.POST)
+    if response.method == 'POST':
+        form_class = InstructorRegisterForm(response.POST)
+        if form_class.is_valid():
+            account = form.save()
+            account.refresh_from_db()
+            account.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            account = authenticate(username=username, password=password)
+            if account is not None:
+                login(response, account)
+
+            return redirect('/')
+
+        else:
+            form = InstructorRegisterForm()
+
+    return render(response, 'instructorregister.html', {'form':form})
 
 def register_view(request):
     if (request.method == "POST"):

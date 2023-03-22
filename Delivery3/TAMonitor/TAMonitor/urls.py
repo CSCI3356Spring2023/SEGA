@@ -38,5 +38,7 @@ urlpatterns = [
     path('',TemplateView.as_view(template_name='home.html'), name ='home'),
 
     path('accounts/login/', view.login_view, name='login'),
-    path('register/', view.register, name='register')
+    path('register/', view.register, name='register'),
+    path('instructorregister/', view.instructorregister, name='instructorregister'),
+    path('studentregister/', view.studentregister, name='studentregister'),
 ]
