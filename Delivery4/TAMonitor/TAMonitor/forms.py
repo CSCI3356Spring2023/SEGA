@@ -65,7 +65,7 @@ class StudentRegisterForm(forms.ModelForm):
             'eagleid': TextInput(attrs={
                 'class': "form-control",
                 'style': 'max-width: 300px;',
-                'placeholder': 'EalgeID'
+                'placeholder': 'Eagle ID'
                 }),
             'work': Select(),
         }

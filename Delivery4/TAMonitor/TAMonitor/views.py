@@ -17,10 +17,10 @@ def register(response):
             account = form.save()
             account.refresh_from_db()
             account.save()
-            # username = form.cleaned_data.get('username')
-            # password = form.cleaned_data.get('password1')
-            # account = authenticate(username=username, password=password)
-            # login(response, account)
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            account = authenticate(username=username, password=password)
+            login(response, account)
 
             return redirect('/')
 
@@ -42,6 +42,7 @@ def studentregister(response):
             account = authenticate(username=username, password=password)
             if account is not None:
                 login(response, account)
+                # return redirect('/home')
 
             return redirect('/')
 

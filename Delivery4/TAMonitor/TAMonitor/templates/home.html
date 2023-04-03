@@ -12,13 +12,13 @@
     {% block content %}
     {% if user.is_authenticated %}
         Hi {{ user.username }}!
-        <p><a href="{% url 'logout' %}">Log Out</a></p>
+        <p><a href="/logout">Log Out</a></p>
         {% if user_type %}
             <p>You selected: {{ user_type }}</p>
         {% endif %}
     {% else %}
-        <p>You are not logged in</p>
-        <a href="{% url 'login' %}">Log In</a> 
+    <a href="{%url 'login' %}">Please Login in Here</a>
+       
     {% endif %}
     {% endblock %}
 </body>
