@@ -3,20 +3,10 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from summary.models import Course, Account, Student, Instructor, Admin
 
-class CourseAdminForm(forms.ModelForm):
 
-    class Meta:
-        model = Course
-        fields = ('Name', 'CourseID', 'Instructor', 'SeatData', 'Rooms', 'Times')
-
-class CourseAdmin(admin.ModelAdmin):
-    list_display = ('Name', 'CourseID', 'Instructor', 'SeatData', 'Rooms', 'Times', 'TAs')
-    list_filter = ('Name', 'CourseID', 'Instructor', 'SeatData', 'Rooms', 'Times', 'TAs')
-    form = CourseAdminForm
-
-admin.site.register(Course, CourseAdmin)
 admin.site.register(Student)
 admin.site.register(Instructor)
 admin.site.register(Admin)
+admin.site.register(Course)
 admin.site.unregister(Group)
-admin.site.site_header = "Boston College"
+admin.site.site_header = "Boston College TA Application System Overview"

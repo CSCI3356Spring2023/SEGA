@@ -1,25 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% extends 'base.html' %}
+    {% csrf_token %}
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BC TAMonitor</title>
+    <title>Document</title>
+    {% load static %}
+    <link href="{% static 'TAMonitor/style.css' %}" rel="stylesheet" type="text/css" />
 </head>
-<body>
-    {% extends 'base.html' %}
+<body>  
     {% block title %}Home{% endblock %}
     {% block content %}
     {% if user.is_authenticated %}
-        Hi {{ user.username }}!
-        <p><a href="{% url 'logout' %}">Log Out</a></p>
+        Welcome {{ user.username }}
+        <p><a href="/logout">Log Out</a></p>
         {% if user_type %}
             <p>You selected: {{ user_type }}</p>
         {% endif %}
     {% else %}
-        <p>You are not logged in</p>
-        <a href="{% url 'login' %}">Log In</a> 
+        <p>You are not logged in.</p>
+        <a href="{%url 'login' %}">Please Log In in Here</a>
     {% endif %}
+        <div class="course-overview">
+            <p>Existing Courses</p>
+            <div class="table">
+                <table class="table">
+                    <caption>
+                        Course Overview
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th scope="col"><h4>Course ID</h4></th>
+                            <th scope="col"><h4>Schedule</h4></th>
+                            <th scope="col"><h4>Office Hours</h4></th>
+                            <th scope="col"><h4>TAs</h4></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if courses %}
+                        Number of courses: {{ courses|length }}
+                        <tbody> 
+                            {% for course in courses %}
+                            <tr scope="row">
+                                <td>{{course.CourseID}}</td> 
+                                <td>{{course.Times}}</td> 
+                                <td>{{course.OfficeHours}}</td>
+                                <td>{{course.TAs}}</td>  
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        {% else %}
+                          <p>You have no courses registered.</p> 
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% if user.is_authenticated and user.is_student %}
+    <a href="/application">Create an application</a>
+    {% endif %}
+
+    {% if user.is_authenticated and user.is_admin %}
+    <a href="/admin"></a>
+    {% endif %}
+
+
+       
+             
+    
     {% endblock %}
 </body>
 </html>

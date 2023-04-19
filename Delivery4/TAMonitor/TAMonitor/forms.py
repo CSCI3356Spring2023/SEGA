@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput, PasswordInput, Select
 from django import forms
-from summary.models import Account, Student, Instructor, Admin
+from summary.models import Account, Student, Instructor, Admin, Course, Application
 
 
 class RegisterForm(forms.ModelForm):
@@ -101,4 +101,16 @@ class InstructorRegisterForm(forms.ModelForm):
                 'placeholder': 'Positions e.g CS Professor'
             }),
         }
+
+class ApplicationForm(forms.ModelForm):
+    class Meta:
+        model = Application
+        fields = ["selected_course", "experience", "resume"]
+
+    # field_list = [Course.Name for Course in Course._meta.get_fields()]
+    course_list = Course.objects.all()
+    selected_course = forms.ChoiceField(label="Select A Course to Apply For.", choices=course_list)
+    experience = forms.CharField(label="Describe your previous experience with the course, including any grades you may have recieved.")
+    resume = forms.FileField(label="Upload a resume here.")
+
 

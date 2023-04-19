@@ -35,9 +35,10 @@ from . import views as view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/',include("django.contrib.auth.urls")),
-    path('',TemplateView.as_view(template_name='home.html'), name ='home'),
+    path('', view.home, name='home'),
 
     path('accounts/login/', view.login_view, name='login'),
+    path('logout/', view.logout_view),
     path('register/', view.register, name='register'),
     path('studentregister/', view.studentregister, name='studentregister'),
     path('instructorregister/', view.instructorregister, name='instructorregister'),

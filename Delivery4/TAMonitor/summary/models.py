@@ -20,8 +20,8 @@ class Account(models.Model):
 
 class Application(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE, primary_key=False)
-    CourseName = models.CharField(max_length=255)
-    Experience = models.CharField(max_length=2056)
+    SelectedCourse = models.CharField(max_length=255)
+    Experience = models.CharField(max_length=4096)
     Resume = models.FileField(default='', blank=True)
 
     def __str__(self):
@@ -29,21 +29,21 @@ class Application(models.Model):
 
 class Course(models.Model):
     CourseID    = models.CharField(max_length=255)
-    Name  = models.CharField(max_length=255)
+    Name        = models.CharField(max_length=255)
     Instructor  = models.CharField(max_length=255)
     Description = models.CharField(max_length=2056, null=True)
     SeatData    = models.CharField(max_length=255)
     Rooms       = models.CharField(max_length=255)
     Times       = models.CharField(max_length=255)
     TAs = models.IntegerField(null=True)
-    WithDiscussion = models.BooleanField(null=True)
-    GradedInMeeting = models.BooleanField(null=True)
+    WithDiscussion = models.BooleanField(default = "Yes")
+    GradedInMeeting = models.BooleanField(default = "Yes")
     OfficeHours = models.CharField(max_length=255, null=True)
     ExtraInfo   = models.CharField(max_length=2056, null=True)
     Applications = models.ManyToManyField(Application, default='', blank=True)
 
     def __str__(self):
-      return self.Name
+      return self.CourseID
 
 class Student(Account):
     YEAR_IN_SCHOOL = [

@@ -5,9 +5,11 @@
 # from summary.models import Account
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, InstructorRegisterForm, StudentRegisterForm
 from django.contrib.auth.models import User
+from summary.models import Application, Course
 
 def register(response):
     form = RegisterForm(response.POST)
@@ -42,7 +44,7 @@ def studentregister(response):
             account = authenticate(username=username, password=password)
             if account is not None:
                 login(response, account)
-                # return redirect('/home')
+                # return redirect('/home/student')
 
             return redirect('/')
 
@@ -65,6 +67,7 @@ def instructorregister(response):
             account = authenticate(username=username, password=password)
             if account is not None:
                 login(response, account)
+                # return redirect('home/instructor')
 
             return redirect('/')
 
@@ -106,3 +109,29 @@ def login_view(request):
     else:
         # handle GET request to show login form
         return render(request, 'login.html')
+
+def home(response):
+    courses = Course.objects.all()
+    return render(response, 'home.html', {'courses':courses})
+
+def logout_view(request):
+    logout(request)
+    return render(request, 'home.html')
+
+def apply(response, course_id):
+    if response.method == "POST":
+        form = ApplicationForm(response.POST, response.FILES)
+        course = Course.objects.get(course_id = course_id)
+        if form.is_valid():
+            application = Application(course_id = course.CourseID, user = response.user)
+            application.refresh_from_db()
+            application.save()
+            selected_course = form.cleaned_data.get('selected_course')
+            experience = form.cleaned_data.get('experience')
+            resume = response.FILES['resume']
+
+
+
+
+
+
