@@ -122,13 +122,20 @@ def apply(response, course_id):
     if response.method == "POST":
         form = ApplicationForm(response.POST, response.FILES)
         course = Course.objects.get(course_id = course_id)
+        apps = Application.objects.filer(user=user)
+        num_apps = len(apps)
         if form.is_valid():
-            application = Application(course_id = course.CourseID, user = response.user)
-            application.refresh_from_db()
-            application.save()
-            selected_course = form.cleaned_data.get('selected_course')
-            experience = form.cleaned_data.get('experience')
-            resume = response.FILES['resume']
+            if num_apps < 5:
+                application = Application(course_id = course.CourseID, user = response.user)
+                application.refresh_from_db()
+                application.save()
+                course.Applications.add(application)
+                selected_course = form.cleaned_data.get('selected_course')
+                experience = form.cleaned_data.get('experience')
+                application.resume = resume
+                resume = response.FILES['resume']
+    else:
+        form = ApplicationForm()
 
 
 

@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    {% extends 'base.html' %}
-    {% csrf_token %}
-    {% load static %}
+    {% extends 'base.html' %}  
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    {% load static %}
-    <link href="{% static 'TAMonitor/style.css' %}" rel="stylesheet" type="text/css" />
+    <title>Document</title> 
 </head>
-<body>  
+<body>   
     {% block title %}Home{% endblock %}
     {% block content %}
     {% if user.is_authenticated %}
@@ -24,8 +18,8 @@
         <p>You are not logged in.</p>
         <a href="{%url 'login' %}">Please Log In in Here</a>
     {% endif %}
-        <div class="course-overview">
-            <p>Existing Courses</p>
+    {% if courses %}
+        <div class="course-overview"> 
             <div class="table">
                 <table class="table">
                     <caption>
@@ -37,10 +31,12 @@
                             <th scope="col"><h4>Schedule</h4></th>
                             <th scope="col"><h4>Office Hours</h4></th>
                             <th scope="col"><h4>TAs</h4></th>
+                            <th scope="col"><h4>Click to Apply</h4></th>
+                           
                         </tr>
                     </thead>
                     <tbody>
-                        {% if courses %}
+                      
                         Number of courses: {{ courses|length }}
                         <tbody> 
                             {% for course in courses %}
@@ -49,6 +45,7 @@
                                 <td>{{course.Times}}</td> 
                                 <td>{{course.OfficeHours}}</td>
                                 <td>{{course.TAs}}</td>  
+                                <td><a href="/apply">Apply</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
