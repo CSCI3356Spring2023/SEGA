@@ -45,4 +45,6 @@ urlpatterns = [
     path('register/', view.register, name='register'),
     path('studentregister/', view.studentregister, name='studentregister'),
     path('instructorregister/', view.instructorregister, name='instructorregister'),
+    path('emailsender/', include('send.urls')),
+    path('formsender/', include('send.urls')),
 ]

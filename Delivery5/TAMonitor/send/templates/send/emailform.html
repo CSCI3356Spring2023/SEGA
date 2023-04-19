@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>TA Contact Form</title>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: maroon;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        label {
+            color: white;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="email"], textarea {
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button[type="submit"] {
+            background-color: white;
+            color: maroon;
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Add custom validation error message */
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        /* Add back to home button */
+        .back-to-home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-to-home a {
+            display: inline-block;
+            background-color: white;
+            color: maroon;
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .back-to-home a:hover {
+            background-color: maroon;
+            color: white;
+        }
+        
+        /* Add photo */
+        .logo {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>TA Contact Form</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_subject">Subject:</label>
+        {{ form.subject }}
+        <label for="id_recipient">Recipient:</label>
+        {{ form.recipient }}
+        {% if form.recipient.errors %}
+            <span class="error">{{ form.recipient.errors.0|escape }}</span>
+        {% endif %}
+        <label for="id_body">Body:</label>
+        {{ form.body }}
+        <button type="submit">Send</button>
+    </form>
+    <div class="back-to-home">
+        <a href="{% url 'home' %}">Back to Home</a>
+    </div>
+</body>
+</html>
