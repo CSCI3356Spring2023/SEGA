@@ -42,4 +42,5 @@ urlpatterns = [
     path('register/', view.register, name='register'),
     path('studentregister/', view.studentregister, name='studentregister'),
     path('instructorregister/', view.instructorregister, name='instructorregister'),
+    path('apply/', view.apply, name='apply'),
 ]

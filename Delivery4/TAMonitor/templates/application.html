@@ -1,0 +1,23 @@
+<head>
+  {% extends 'base.html' %}
+</head>
+
+{% block content %}    
+Submit an Application
+<form method="POST" class="form-group">
+    <div class="form-group">
+        {{ form.selected_course.label }}<br>{{ form.selected_course }}
+    </div>
+    <br>
+     <div class="form-group">
+         {{form.experience.label}}<br>{{ form.experience }}
+    </div> 
+    <br>
+    <div class="form-group">
+        {{form.resume.label}}<br>{{ form.resume }}
+    </div>
+    <br>
+    <button type="submit" class="btn btn-success" href="">Submit</button>
+</form>
+{% endblock %}
+

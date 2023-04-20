@@ -103,14 +103,14 @@ class InstructorRegisterForm(forms.ModelForm):
         }
 
 class ApplicationForm(forms.ModelForm):
+    # field_list = [Course.Name for Course in Course._meta.get_fields()]
+    course_list = Course.objects.all()
+    selected_course = forms.ModelChoiceField(label="Select A Course to Apply For.", queryset=Course.objects.all())
+    experience = forms.CharField(label="Describe your previous experience with the course, including any grades you may have recieved.")
+    resume = forms.FileField(label="Upload a resume here.")
+
     class Meta:
         model = Application
         fields = ["selected_course", "experience", "resume"]
-
-    # field_list = [Course.Name for Course in Course._meta.get_fields()]
-    course_list = Course.objects.all()
-    selected_course = forms.ChoiceField(label="Select A Course to Apply For.", choices=course_list)
-    experience = forms.CharField(label="Describe your previous experience with the course, including any grades you may have recieved.")
-    resume = forms.FileField(label="Upload a resume here.")
 
 

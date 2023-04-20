@@ -7,7 +7,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, InstructorRegisterForm, StudentRegisterForm
+from .forms import RegisterForm, InstructorRegisterForm, StudentRegisterForm, ApplicationForm
 from django.contrib.auth.models import User
 from summary.models import Application, Course
 
@@ -118,10 +118,10 @@ def logout_view(request):
     logout(request)
     return render(request, 'home.html')
 
-def apply(response, course_id):
+def apply(response):
     if response.method == "POST":
         form = ApplicationForm(response.POST, response.FILES)
-        course = Course.objects.get(course_id = course_id)
+        course = Course.objects.all()
         apps = Application.objects.filer(user=user)
         num_apps = len(apps)
         if form.is_valid():
@@ -136,6 +136,7 @@ def apply(response, course_id):
                 resume = response.FILES['resume']
     else:
         form = ApplicationForm()
+        return render(response, 'application.html', {'form':form})
 
 
 
