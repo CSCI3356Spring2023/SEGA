@@ -5,12 +5,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            background-color: #73131d;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            position: relative;
+        }
+        header img {
+            max-width: 100%;
+            max-height: 100%;
+            position: absolute; /* Add this */
+            top: 50%; /* Add this */
+            transform: translateY(-50%); /* Add this */
+        }
+        .login-container {
+            background-color: white;
+            padding: 40px 40px 40px 40px;
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #73131d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .btn:hover {
+            background-color: darkred;
+        }
+        .footer {
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Boston College TA Application Portal</h1>
+    <header>
+        {% load static %}
+        <img src="{% static 'images/bclogo.png' %}" alt="BC Logo">
+    </header>
     <main>
         {% block content %}
         {% endblock %}
     </main>
+    <p>Need help? Call the Help Center at 617-552-HELP(4357)</p> 
 </body>
+<footer>
+    
+</footer>
 </html>
