@@ -1,32 +1,35 @@
+{% extends 'base.html' %}
 {% block title %}Create an Account (Student){% endblock %}
 
 {% block content %}
-    <form method="POST" class="form-group">
-        {% csrf_token %}        
-        <div class="form-group">
-            {{ form.firstname }}
-        </div>
-        <div class="form-group">
-            {{ form.lastname }}
-        </div>
-        <div class="form-group">
-            {{ form.bcemail }}
-        </div>
-        <div class="form-group">
-            {{ form.password }}
-        </div>
-        <div class="form-group">
-            {{ form.major }}
-        </div>
-        <div class="form-group">
-            {{ form.eagleid }}
-        </div>
-        <div class="form-group">
-            {{ form.year_in_school }}
-        </div>
-         <div class="form-group">
-            {{ form.work }}
-        </div>       
-        <button type="submit" class="btn btn-success" href="/accounts/login">Register</button>
-    </form>
+<div class="login-container">
+  <form method="POST" class="form-group">
+    {% csrf_token %}        
+    <div class="form-group">
+      {{ form.firstname }}
+    </div>
+    <div class="form-group">
+      {{ form.lastname }}
+    </div>
+    <div class="form-group">
+      {{ form.bcemail }}
+    </div>
+    <div class="form-group">
+      {{ form.password }}
+    </div>
+    <div class="form-group">
+      {{ form.major }}
+    </div>
+    <div class="form-group">
+      {{ form.eagleid }}
+    </div>
+    <div class="form-group">
+      {{ form.year_in_school }}
+    </div>
+    <div class="form-group">
+      {{ form.work }}
+    </div>       
+    <button type="submit" class="btn btn-success" href="/accounts/login">Register</button>
+  </form>
+</div>
 {% endblock %}
