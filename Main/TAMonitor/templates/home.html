@@ -1,0 +1,70 @@
+<head>
+    {% extends 'base.html' %}     
+    <title>Home</title> 
+</head>
+<body>   
+    {% block title %}Home{% endblock %}
+    {% block content %}
+    {% if user.is_authenticated %}
+    Your email is used as your username. The email you registered with is <b>{{ user.email }}</b>
+        <p><a href="/logout">Log Out</a></p>
+    {% else %}
+        <p>You are not logged in.</p>
+        <a href="{%url 'login' %}">Log In in Here</a>
+        <br>
+        <a href="{%url 'register'%}">Register an account here</a>
+    {% endif %}
+    {% if courses %}
+        <div class="course-overview"> 
+            <div class="table">
+                <table class="table table-bordered table-hover table-striped table-condensed text-center">
+                    <div class="caption center-block text-center"> 
+                        Course Overview 
+                    </div>
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width:16.66%"><h4>Course ID</h4></th>
+                            <th scope="col" style="width:25%"><h4>Schedule</h4></th>
+                            <th scope="col" style="width:15%"><h4>Office Hours</h4></th>
+                            <th scope="col" style="width:15%"><h4>TAs</h4></th>
+                            <th scope="col" style="width:15%"><h4>Click to Apply</h4></th>
+                           
+                        </tr>
+                    </thead>
+                    <div class="caption center-block text-center">
+                        Number of courses: {{ courses|length }}
+                    </div>
+                    <tbody> 
+                        <tbody> 
+                            {% for course in courses %}
+                            <tr scope="row">
+                                <td>{{course.CourseID}}</td> 
+                                <td>{{course.Times}}</td> 
+                                <td>{{course.OfficeHours}}</td>
+                                <td>{{course.TAs}}</td>  
+                                <td class=><a href="/apply">Apply</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        {% else %}
+                          <p>There are no courses registered in the system.</p> 
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% if user.is_authenticated and user.is_student %}
+    <a href="/application">Create an application</a>
+    {% endif %}
+
+    {% if user.is_authenticated and user.is_admin %}
+    <a href="/admin"></a>
+    {% endif %}
+
+
+       
+             
+    
+    {% endblock %}
+</body>
+</html>

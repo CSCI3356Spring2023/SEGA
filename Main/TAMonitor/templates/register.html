@@ -1,0 +1,12 @@
+{% block title %}<b>Select a role</b>{% endblock %}
+
+{% block content %}
+    <form method="POST" class="form-group">
+        {% csrf_token %}       
+        <div>
+            <a type="submit" class="btn btn-default" href="/studentregister">Click here if you are a Student</a><br>
+            <a type="submit" class="btn btn-default" href="/instructorregister">Click here if you are an Instructor</a><br>
+            <a type="submit" class="btn btn-default" href="/adminregister">Click here if you are an Administrator</a><br>
+        </div>  
+    </form>
+{% endblock %}

@@ -1,0 +1,31 @@
+<head>
+  {% extends 'base.html' %}
+</head>
+<style>
+form#experience {
+    height: 1000px;
+}
+</style>
+
+{% load crispy_forms_tags %}
+{% block content %}    
+Submit an Application
+
+<form method="POST" class="form-group">
+{% csrf_token %}        
+    <div class="form-group">
+       {{ form.selected_course|as_crispy_field }}
+    </div>
+    <br>
+     <div class="form-group">
+        {{ form.experience|as_crispy_field }}
+    </div> 
+    <br>
+    <div class="form-group">
+        {{ form.resume|as_crispy_field }}
+    </div>
+    <br>
+    <button type="submit" class="btn btn-success" href="">Submit</button>
+</form>
+{% endblock %}
+
