@@ -14,6 +14,12 @@
         <br>
         <a href="{%url 'register'%}">Register an account here</a>
     {% endif %}
+    {% if user.is_instructor %}
+        <a href="/">View the Instructor Summary here</a>
+    {% endif %}
+    {% if user.is_admin or user.is_superuser %}
+        <a href="/admin">View the admin panel here</a>
+    {% endif %}
     {% if courses %}
         <div class="course-overview"> 
             <div class="table">

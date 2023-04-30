@@ -1,23 +1,9 @@
-{% block title %}Create an Account (Instructor){% endblock %}
+<h3>Register here</h3>
 
-{% csrf_token %}        
-{% block content %}
-    <form method="POST" class="form-group">
-        <div class="form-group">
-            {{ form.firstname }}
-        </div>
-        <div class="form-group">
-            {{ form.lastname }}
-        </div>
-        <div class="form-group">
-            {{ form.bcemail }}
-        </div>
-        <div class="form-group">
-            {{ form.password }}
-        </div>
-        <div class="form-group">
-            {{ form.position }}
-        </div>
-        <button type="submit" class="btn btn-success">Register</button>
-    </form>
-{% endblock %}
+{% load crispy_forms_tags %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <button type="submit" class="btn btn-success">Register</button>
+</form>

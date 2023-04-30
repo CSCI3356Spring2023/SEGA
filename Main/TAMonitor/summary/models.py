@@ -1,62 +1,48 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager
-
-class UserManager(BaseUserManager):
-    use_in_migrations = True
-
-    def _create_user(self, email, password, **extra_fields):
-        """Create and save a User with the given email and password."""
-        if not email:
-            raise ValueError('The given email must be set')
-        email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_user(self, email, password=None, **extra_fields):
-        """Create and save a regular User with the given email and password."""
-        extra_fields.setdefault('is_staff', False)
-        extra_fields.setdefault('is_superuser', False)
-        return self._create_user(email, password, **extra_fields)
-
-    def create_superuser(self, email, password, **extra_fields):
-        """Create and save a SuperUser with the given email and password."""
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
-
-        return self._create_user(email, password, **extra_fields)
-
+from django.contrib.auth.models import AbstractUser, AbstractBaseUser, BaseUserManager
+from django.utils.translation import gettext_lazy as _
 
 class Account(AbstractUser):
-    email = models.EmailField(('email address'), unique=True)
-    firstname = models.CharField(max_length=64)
-    lastname = models.CharField(max_length=64)
-    password = models.CharField(max_length=64)
+    email = models.EmailField(('email address'), max_length=64, unique=True)
     is_student = models.BooleanField(default=False)
     is_instructor = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['firstname', 'lastname', 'password']
+    username = models.CharField(max_length=20, unique=False, default='')
 
-    objects = UserManager()
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
+    class Meta:
+        verbose_name = _("Account")
+        verbose_name_plural = _("Accounts")
 
     def __str__(self):
       return self.email
 
-
-
 class Application(models.Model):
-    user = models.ForeignKey(Account, on_delete=models.CASCADE, primary_key=False)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, primary_key=False)
     SelectedCourse = models.CharField(max_length=255)
     Experience = models.CharField(max_length=4096)
     Resume = models.FileField(default='', blank=True)
+
+    STATUS_CHOICES = (
+        ('Available', 'Available'),
+        ('Unavailable', 'Unavailable'),
+        ('Accepted', 'Accepted'),
+        ('Rejected', 'Rejected'),
+    )
+
+    status = models.CharField(
+        max_length=15,
+        choices=STATUS_CHOICES,
+        default='Available',
+    )
+
+    class Meta:
+        verbose_name = _("Application")
+        verbose_name_plural = _("Applications")
+
 
     def __str__(self):
         return 'TA-Application-' + str(self.id) + '-' + self.CourseName
@@ -76,10 +62,18 @@ class Course(models.Model):
     ExtraInfo   = models.CharField(max_length=2056, null=True)
     Applications = models.ManyToManyField(Application, default='', blank=True)
 
+    class Meta:
+        verbose_name = _("Course")
+        verbose_name_plural = _("Courses")
+
     def __str__(self):
       return self.CourseID
 
-class Student(Account):
+class Student(models.Model):
+    account = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
+    firstname = models.CharField(max_length=64)
+    lastname = models.CharField(max_length=64)
+    email = models.EmailField(max_length=40)
     YEAR_IN_SCHOOL = [
         ('FR', 'Freshman'),
         ('SO', 'Sophomore'),
@@ -103,17 +97,39 @@ class Student(Account):
     eagleid = models.CharField(max_length=16)
     work = models.CharField(max_length=16, choices=OPEN_TO_WORK, default='Open to work')
 
+    class Meta:
+        verbose_name = _("Student")
+        verbose_name_plural = _("Students")
+
     def __str__(self):
       return self.email
 
-class Instructor(Account):
+class Instructor(models.Model):
+    account = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
+    firstname = models.CharField(max_length=64)
+    lastname = models.CharField(max_length=64)
     position = models.CharField(max_length=255) # e.g CS Professor
+    email = models.EmailField(max_length=40)
+
+    class Meta:
+        verbose_name = _("Instructor")
+        verbose_name_plural = _("Instructors")
 
     def __str__(self):
       return self.email
 
-class Admin(Account):
+class Admin(models.Model):
+    account = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
+    firstname = models.CharField(max_length=64)
+    lastname = models.CharField(max_length=64)
+    email = models.EmailField(max_length=40)
     position = models.CharField(max_length=255) # e.g IT Admin
 
+    class Meta:
+        verbose_name = _("Admin")
+        verbose_name_plural = _("Admins")
+
     def __str__(self):
       return self.email
+
+
