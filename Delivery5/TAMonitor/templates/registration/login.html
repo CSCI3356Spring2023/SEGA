@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In</title>
+  <style>
+    body {
+      background-color: #960000;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #C71585; /* use a light maroon color for the border */
+      border-radius: 5px;
+      background-color: #F8F8FF; /* use a light shade of gray for the background */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    {% extends 'base.html' %}
+    {% block title %}Login{% endblock %}
+    {% block content %}
+      <h2>Log In</h2> 
+      <form method="post">
+        {% csrf_token %}
+        <label for="user_type">User Type:</label>
+        <select name="user_type" id="user_type">
+          <option value="admin">Administrator</option>
+          <option value="instructor">Instructor</option>
+          <option value="student">Student</option>
+        </select>
+        {{ form.as_p }}
+        <button class="btn" type="submit">Log In</button>
+      </form>
+      <br>
+      <!-- <a href="#">Forgot Password?</a> -->
+      <p>Don't have an account? <a href="/register">Create an account</a></p>
+      <p>Need help? Call the Help Center at 617-552-HELP(4357)</p> 
+
+    {% endblock %}
+  </div>
+
+</body>
+</html>
