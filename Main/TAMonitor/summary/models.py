@@ -29,6 +29,7 @@ class Application(models.Model):
     STATUS_CHOICES = (
         ('Available', 'Available'),
         ('Unavailable', 'Unavailable'),
+        # ('In Progress', 'In Progress'),
         ('Accepted', 'Accepted'),
         ('Rejected', 'Rejected'),
     )
@@ -45,7 +46,7 @@ class Application(models.Model):
 
 
     def __str__(self):
-        return 'TA-Application-' + str(self.id) + '-' + self.CourseName
+        return 'TA-Application-' + str(self.account.email) + '-' + self.SelectedCourse
 
 class Course(models.Model):
     CourseID    = models.CharField(max_length=255)
@@ -96,6 +97,7 @@ class Student(models.Model):
     major = models.CharField(max_length=64)
     eagleid = models.CharField(max_length=16)
     work = models.CharField(max_length=16, choices=OPEN_TO_WORK, default='Open to work')
+    applications = models.ManyToManyField(Application, default='', blank=True)
 
     class Meta:
         verbose_name = _("Student")

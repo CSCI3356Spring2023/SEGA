@@ -89,21 +89,26 @@ def apply(response):
         form = ApplicationForm(response.POST, response.FILES)
         user = response.user
         if user.is_student:
-            student = Student.objects.get(user=user)
-        course = Course.objects.get(id=id)
-        apps = Application.objects.filter(user=user)
+            student = Student.objects.get(email=user.email)
+        selected_course = response.POST.get('selected_course')
+        course = Course.objects.get(pk=selected_course)
+        apps = Application.objects.filter(account=user)
         app_count = len(apps)
 
         if form.is_valid() and app_count < 5:
-            application = Application(course_id = course.CourseID, user = response.user)
-            resume = response.FILES['resume']
-            application.resume = resume
-            application.save()
-            course.application.add(application)
+            application = Application.objects.create(
+                    account = response.user,
+                    SelectedCourse = course,
+                    Experience = response.POST.get('experience'),
+                    Resume = response.POST.get('resume'),
+                    )
+            course.Applications.add(application)
             course.save()
             if user.is_student:
                 print("is student")
                 # Add application to student's list of applications
+                student.applications.add(application)
+                student.save()
         else:
             print("Application Error")
         return redirect('/')
