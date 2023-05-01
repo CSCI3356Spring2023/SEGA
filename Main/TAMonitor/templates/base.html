@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Base Template</title>
+    <title>Home</title>
     {% load static %}
 
     <link
@@ -16,7 +16,11 @@
     />
 </head>
 <body>
-    <h1>Boston College TA Application Portal</h1>
+    <header class="d-flex justify-content-center align-items-center">
+        {% load static %}
+        <img src="{% static 'images/bclogo.png' %}" alt="BC Logo" id="bclogo">
+    </header>
+    <h1 style="padding-left: 20px;">Boston College TA Application Portal</h1>
     <main>
         {% block content %}
         {% endblock %}
@@ -28,4 +32,39 @@ form#id-experience {
     height: 500px;
     color: red;
 }
+img#bclogo {
+    width: 300px;
+    height: auto;
+    margin: 10px 0;
+}
+body {
+    background-color: #73131d;
+    color: white;
+}
+main {
+    background-color: white;
+    color: black;
+    padding: 50px;
+    margin: 20px;
+    border: 1px solid #d8d8d8;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 10);
+}
+.btn {
+    background-color: #aa0000;
+    color: white;
+}
+.btn:hover{
+    color: white;
+    background: #546673;
+}
+header {
+    text-align: center;
+}
+
+img#bclogo {
+    width: 200px;
+    height: auto;
+    margin: 10px 0;
+}
+
 </style>

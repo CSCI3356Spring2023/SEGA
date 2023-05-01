@@ -10,22 +10,24 @@
         <p><a href="/logout">Log Out</a></p>
     {% else %}
         <p>You are not logged in.</p>
-        <a href="{%url 'login' %}">Log In in Here</a>
+        <a href="{%url 'login' %}" class="btn btn-primary">Log In in Here</a>
         <br>
-        <a href="{%url 'register'%}">Register an account here</a>
+        <br>
+        <a href="{%url 'register'%}"class="btn btn-primary">Register an account here</a>
     {% endif %}
     {% if user.is_instructor %}
         <p>You are registered as an instructor.</p>
-        <a href="/createcourse">Create a course here</a>
+        <a href="/createcourse" class="btn btn-primary">Create a course here</a>
         <br>
-        <a href="/instructorsummary">View the Instructor Summary here</a>
+        <a href="/instructorsummary" class="btn btn-primary">View the Instructor Summary here</a>
+        <br>
     {% endif %}
     {% if user.is_student %}
         <p>You are registered as a student.</p> 
     {% endif %}
     {% if user.is_admin or user.is_superuser %}
         <p> You are registered as an admin </p>
-        <a href="/admin">View the admin panel here</a>
+        <a href="/admin" class="btn btn-primary">View the admin panel here</a>
     {% endif %}
     {% if courses and user.is_student %}
         <div class="course-overview"> 
