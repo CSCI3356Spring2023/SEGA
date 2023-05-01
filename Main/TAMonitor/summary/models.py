@@ -29,7 +29,6 @@ class Application(models.Model):
     STATUS_CHOICES = (
         ('Available', 'Available'),
         ('Unavailable', 'Unavailable'),
-        # ('In Progress', 'In Progress'),
         ('Accepted', 'Accepted'),
         ('Rejected', 'Rejected'),
     )
@@ -48,27 +47,28 @@ class Application(models.Model):
     def __str__(self):
         return 'TA-Application-' + str(self.account.email) + '-' + self.SelectedCourse
 
-class Course(models.Model):
-    CourseID    = models.CharField(max_length=255)
-    Name        = models.CharField(max_length=255)
-    Instructor  = models.CharField(max_length=255)
-    Description = models.CharField(max_length=2056, null=True)
-    SeatData    = models.CharField(max_length=255)
-    Rooms       = models.CharField(max_length=255)
-    Times       = models.CharField(max_length=255)
-    TAs = models.IntegerField(null=True)
-    WithDiscussion = models.CharField(max_length=255)
-    GradedInMeeting = models.CharField(max_length=255)
-    OfficeHours = models.CharField(max_length=255, null=True)
-    ExtraInfo   = models.CharField(max_length=2056, null=True)
-    Applications = models.ManyToManyField(Application, default='', blank=True)
+# class Course(models.Model):
+#     Instructor  = models.ForeignKey(Instructor, on_delete=models.CASCADE, primary_key=False)
+#     CourseID    = models.CharField(max_length=255)
+#     Name        = models.CharField(max_length=255)
+#     # Instructor  = models.CharField(max_length=255)
+#     Description = models.CharField(max_length=2056, null=True)
+#     SeatData    = models.CharField(max_length=255)
+#     Rooms       = models.CharField(max_length=255)
+#     Times       = models.CharField(max_length=255)
+#     TAs = models.IntegerField(null=True)
+#     WithDiscussion = models.CharField(max_length=255)
+#     GradedInMeeting = models.CharField(max_length=255)
+#     OfficeHours = models.CharField(max_length=255, null=True)
+#     ExtraInfo   = models.CharField(max_length=2056, null=True)
+#     Applications = models.ManyToManyField(Application, default='', blank=True)
 
-    class Meta:
-        verbose_name = _("Course")
-        verbose_name_plural = _("Courses")
+#     class Meta:
+#         verbose_name = _("Course")
+#         verbose_name_plural = _("Courses")
 
-    def __str__(self):
-      return self.CourseID
+#     def __str__(self):
+#       return self.CourseID
 
 class Student(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
@@ -134,4 +134,25 @@ class Admin(models.Model):
     def __str__(self):
       return self.email
 
+class Course(models.Model):
+    Instructor  = models.ForeignKey(Instructor, on_delete=models.CASCADE, primary_key=False)
+    CourseID    = models.CharField(max_length=255)
+    Name        = models.CharField(max_length=255)
+    # Instructor  = models.CharField(max_length=255)
+    Description = models.CharField(max_length=2056, null=True)
+    SeatData    = models.CharField(max_length=255)
+    Rooms       = models.CharField(max_length=255)
+    Times       = models.CharField(max_length=255)
+    TAs = models.IntegerField(null=True)
+    WithDiscussion = models.CharField(max_length=255)
+    GradedInMeeting = models.CharField(max_length=255)
+    OfficeHours = models.CharField(max_length=255, null=True)
+    ExtraInfo   = models.CharField(max_length=2056, null=True)
+    Applications = models.ManyToManyField(Application, default='', blank=True)
 
+    class Meta:
+        verbose_name = _("Course")
+        verbose_name_plural = _("Courses")
+
+    def __str__(self):
+      return self.CourseID

@@ -81,7 +81,7 @@ class AdminRegisterForm(UserCreationForm):
         account.is_admin = True
         account.email = email
         account.save()
-        Instructor.objects.create(
+        Admin.objects.create(
             account=account,
             firstname=self.cleaned_data.get('firstname'),
             lastname=self.cleaned_data.get('lastname'),
@@ -100,9 +100,9 @@ class ApplicationForm(forms.ModelForm):
         fields = ["selected_course", "experience", "resume"]
 
 class CreateCourseForm(forms.ModelForm):
+    Instructor = forms.ModelChoiceField(label="Instructor for the course", queryset=Instructor.objects.all())
     CourseID = forms.CharField(label = "CourseID")
     Name = forms.CharField(label = "Course Name")
-    Instructor = forms.CharField(label = "Instructor")
     Description = forms.CharField(label = "Description")
     SeatData = forms.CharField(label = "Seats")
     Rooms = forms.CharField(label = "Rooms")
