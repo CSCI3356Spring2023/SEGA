@@ -26,6 +26,8 @@ urlpatterns = [
     path('studentregister/', view.studentregister, name='studentregister'),
     path('instructorregister/', view.instructorregister, name='instructorregister'),
     path('adminregister/', view.adminregister, name='adminregister'),
-    path('apply/', view.apply, name='apply')
+    path('createcourse/', view.createcourse, name='createcourse'),
+    path('instructorsummary/', view.instructorsummary, name='instructorsummary'),
+    path('apply/', view.apply, name='apply'),
 
 ]

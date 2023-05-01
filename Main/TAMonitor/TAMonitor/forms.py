@@ -99,7 +99,7 @@ class ApplicationForm(forms.ModelForm):
         model = Application
         fields = ["selected_course", "experience", "resume"]
 
-class CourseCreateForm(forms.ModelForm):
+class CreateCourseForm(forms.ModelForm):
     CourseID = forms.CharField(label = "CourseID")
     Name = forms.CharField(label = "Course Name")
     Instructor = forms.CharField(label = "Instructor")

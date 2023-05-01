@@ -15,12 +15,19 @@
         <a href="{%url 'register'%}">Register an account here</a>
     {% endif %}
     {% if user.is_instructor %}
-        <a href="/">View the Instructor Summary here</a>
+        <p>You are registered as an instructor.</p>
+        <a href="/createcourse">Create a course here</a>
+        <br>
+        <a href="/instructorsummary">View the Instructor Summary here</a>
+    {% endif %}
+    {% if user.is_student %}
+        <p>You are registered as a student.</p> 
     {% endif %}
     {% if user.is_admin or user.is_superuser %}
+        <p> You are registered as an admin </p>
         <a href="/admin">View the admin panel here</a>
     {% endif %}
-    {% if courses %}
+    {% if courses and user.is_student %}
         <div class="course-overview"> 
             <div class="table">
                 <table class="table table-bordered table-hover table-striped table-condensed text-center">
@@ -53,18 +60,15 @@
                             {% endfor %}
                         </tbody>
                         {% else %}
-                          <p>There are no courses registered in the system.</p> 
+                          <p>Instructors - View the instructor summary to see TA Applications for your courses</p> 
+                          <p>Admins - view the control panel to see the status of the application</p>
                         {% endif %}
                     </tbody>
                 </table>
             </div>
         </div>
-    {% if user.is_authenticated and user.is_student %}
-    <a href="/application">Create an application</a>
-    {% endif %}
 
-    {% if user.is_authenticated and user.is_admin %}
-    <a href="/admin"></a>
+    {% if user.is_authenticated and user.is_admin %} 
     {% endif %}
 
 

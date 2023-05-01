@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
 import os
 
-from .forms import StudentRegisterForm, InstructorRegisterForm, AdminRegisterForm, ApplicationForm
+from .forms import StudentRegisterForm, InstructorRegisterForm, AdminRegisterForm, ApplicationForm, CreateCourseForm
 from summary.models import Account, Student, Instructor, Admin, Course, Application
 
 def home(response):
@@ -56,6 +56,22 @@ def adminregister(request):
 
     context = {'form': form}
     return render(request, 'adminregister.html', context)
+
+def createcourse(request):
+    if request.method == 'POST':
+        form = CreateCourseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = CreateCourseForm()
+
+    context = {'form': form}
+    return render(request, 'createcourse.html', context)
+
+def instructorsummary(request):
+    # Needs implementation
+    return render(request, 'instructorsummary.html')
 
 class CreateApplication(CreateView):
     model = Application
