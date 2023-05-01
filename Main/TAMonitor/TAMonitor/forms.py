@@ -79,6 +79,8 @@ class AdminRegisterForm(UserCreationForm):
         account = super().save(commit=False)
         email = self.cleaned_data.get('email')
         account.is_admin = True
+        account.is_staff = True
+        account.is_superuser = True
         account.email = email
         account.save()
         Admin.objects.create(
