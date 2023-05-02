@@ -28,12 +28,13 @@ urlpatterns = [
     path('studentregister/', view.studentregister, name='studentregister'),
     path('instructorregister/', view.instructorregister, name='instructorregister'),
     path('adminregister/', view.adminregister, name='adminregister'),
-    # path('createcourse/', view.createcourse, name='createcourse'),
     path('createcourse/', view.createcourse.as_view(success_url="/"), name='createcourse'),
     path('courseupdate/<int:pk>', view.courseupdate.as_view(success_url="/"), name='courseupdate'),
     path('coursedetail/<int:pk>', view.coursedetailview.as_view(), name="coursedetail"),
     path('applictionview/<int:pk>', view.applicationview.as_view(), name="applicationview"),
     path('allapplications/', view.applicationoverview, name="applicationoverview"),
+    path('acceptapp/<int:pk>', view.accept_application, name="acceptapp"),
+    path('rejectapp/<int:pk>', view.reject_application, name="rejectapp"),
     path('apply/', view.apply, name='apply'),
 
 ]

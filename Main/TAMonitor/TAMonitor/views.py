@@ -119,3 +119,17 @@ def apply(response):
         form = ApplicationForm()
 
     return render(response, 'application.html', {'form':form})
+
+
+def accept_application(request, pk):
+    app = Application.objects.get(pk=pk)
+    app.status = 'Accepted'
+    app.save()
+    return redirect('/allapplications')
+
+def reject_application(request, pk):
+    app = Application.objects.get(pk=pk)
+    app.status = 'Rejected'
+    app.save()
+    return redirect('/allapplications')
+
