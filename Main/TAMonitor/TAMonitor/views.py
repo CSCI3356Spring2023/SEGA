@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import UpdateView, CreateView
+from django.views.generic.detail import DetailView
 import os
 
 from .forms import StudentRegisterForm, InstructorRegisterForm, AdminRegisterForm, ApplicationForm, CreateCourseForm
@@ -57,30 +58,17 @@ def adminregister(request):
     context = {'form': form}
     return render(request, 'adminregister.html', context)
 
-# def createcourse(request):
-#     if request.method == 'POST':
-#         form = CreateCourseForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('/')
-#     else:
-#         form = CreateCourseForm()
-
-#     context = {'form': form}
-#     return render(request, 'createcourse.html', context)
-
 class createcourse(CreateView):
     model = Course
-    fields = "__all__"
+    fields = ["Instructor", "CourseID", "Name", "Description", "SeatData", "Rooms", "Times", "TAs", "WithDiscussion", "GradedInMeeting", "OfficeHours", "ExtraInfo"]
 
 class courseupdate(UpdateView):
     model = Course
-    fields = "__all__"
+    fields = ["Instructor", "CourseID", "Name", "Description", "SeatData", "Rooms", "Times", "TAs", "WithDiscussion", "GradedInMeeting", "OfficeHours", "ExtraInfo"]
     template_name_suffix = '_update_form'
 
-def instructorsummary(request):
-    # Needs implementation
-    return render(request, 'instructorsummary.html')
+class coursedetailview(DetailView):
+    model = Course
 
 class CreateApplication(CreateView):
     model = Application
@@ -114,7 +102,6 @@ def apply(response):
             course.Applications.add(application)
             course.save()
             if user.is_student:
-                print("is student")
                 # Add application to student's list of applications
                 student.applications.add(application)
                 student.save()

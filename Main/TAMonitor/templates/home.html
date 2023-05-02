@@ -41,6 +41,7 @@
                             <th scope="col" style="width:15%"><h4>Office Hours</h4></th>
                             <th scope="col" style="width:15%"><h4>TAs</h4></th>
                             <th scope="col" style="width:15%"><h4>Click to Apply</h4></th>
+                            <th scope="col" style="width:15%"><h4>Details</h4></th>
                            
                         </tr>
                     </thead>
@@ -56,6 +57,7 @@
                                 <td>{{course.OfficeHours}}</td>
                                 <td>{{course.TAs}}</td>  
                                 <td class=><a href="/apply">Apply</a></td>
+                                <td><a href="{% url 'coursedetail' course.id %}">Details</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -84,6 +86,8 @@
                         <th scope="col" style="width:15%"><h4>Office Hours</h4></th>
                         <th scope="col" style="width:15%"><h4>TAs</h4></th>
                         <th scope="col" style="width:15%"><h4>Edit</h4></th>
+
+                            <th scope="col" style="width:15%"><h4>Details</h4></th>
                        
                     </tr>
                 </thead> 
@@ -100,6 +104,7 @@
                             <td>{{course.OfficeHours}}</td>
                             <td>{{course.TAs}}</td>  
                             <td><a href="{%url 'courseupdate' course.id %}">Edit</a></td>
+                            <td><a href="{% url 'coursedetail' course.id %}">Details</a></td>
                         </tr>
                         {% endif %}
                         {% endfor %}
@@ -128,6 +133,7 @@
                             <th scope="col" style="width:15%"><h4>Office Hours</h4></th>
                             <th scope="col" style="width:15%"><h4>TAs</h4></th>
                             <th scope="col" style="width:15%"><h4>Click to Edit</h4></th>
+                            <th scope="col" style="width:15%"><h4>Details</h4></th>
                            
                         </tr>
                     </thead>
@@ -143,6 +149,7 @@
                                 <td>{{course.OfficeHours}}</td>
                                 <td>{{course.TAs}}</td>  
                                 <td><a href="{%url 'courseupdate' course.id %}">Edit</a></td>
+                                <td><a href="{% url 'coursedetail' course.id %}">Details</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>

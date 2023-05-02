@@ -29,7 +29,7 @@ urlpatterns = [
     # path('createcourse/', view.createcourse, name='createcourse'),
     path('createcourse/', view.createcourse.as_view(success_url="/"), name='createcourse'),
     path('courseupdate/<int:pk>', view.courseupdate.as_view(success_url="/"), name='courseupdate'),
-    path('instructorsummary/', view.instructorsummary, name='instructorsummary'),
+    path('coursedetail/<int:pk>', view.coursedetailview.as_view(), name="coursedetail"),
     path('apply/', view.apply, name='apply'),
 
 ]

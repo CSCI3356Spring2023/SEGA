@@ -22,7 +22,8 @@ class Account(AbstractUser):
 
 class Application(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE, primary_key=False)
-    SelectedCourse = models.CharField(max_length=255)
+    SelectedCourse = models.ForeignKey('Course', on_delete=models.CASCADE, primary_key=False)
+    # SelectedCourse = models.CharField(max_length=255)
     Experience = models.CharField(max_length=4096)
     Resume = models.FileField(default='', blank=True)
 
@@ -45,30 +46,7 @@ class Application(models.Model):
 
 
     def __str__(self):
-        return 'TA-Application-' + str(self.account.email) + '-' + self.SelectedCourse
-
-# class Course(models.Model):
-#     Instructor  = models.ForeignKey(Instructor, on_delete=models.CASCADE, primary_key=False)
-#     CourseID    = models.CharField(max_length=255)
-#     Name        = models.CharField(max_length=255)
-#     # Instructor  = models.CharField(max_length=255)
-#     Description = models.CharField(max_length=2056, null=True)
-#     SeatData    = models.CharField(max_length=255)
-#     Rooms       = models.CharField(max_length=255)
-#     Times       = models.CharField(max_length=255)
-#     TAs = models.IntegerField(null=True)
-#     WithDiscussion = models.CharField(max_length=255)
-#     GradedInMeeting = models.CharField(max_length=255)
-#     OfficeHours = models.CharField(max_length=255, null=True)
-#     ExtraInfo   = models.CharField(max_length=2056, null=True)
-#     Applications = models.ManyToManyField(Application, default='', blank=True)
-
-#     class Meta:
-#         verbose_name = _("Course")
-#         verbose_name_plural = _("Courses")
-
-#     def __str__(self):
-#       return self.CourseID
+        return 'TA-Application-' + str(self.account.email) + '-' + self.SelectedCourse.CourseID
 
 class Student(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
@@ -156,3 +134,5 @@ class Course(models.Model):
 
     def __str__(self):
       return self.CourseID
+
+
