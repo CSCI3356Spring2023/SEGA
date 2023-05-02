@@ -31,7 +31,7 @@
                   <tbody> 
                       <tbody>  
                           {% for app in applications %}
-                          {% if app.SelectedCourse.Instructor|stringformat:"s" == user.email|stringformat:"s" %}
+                          {% if app.SelectedCourse.Instructor|stringformat:"s" == user.email|stringformat:"s" or user.is_admin or user.is_superuser %}
                           <tr scope="row">
                               <td>{{app.account.email}}</td> 
                               <td>{{app.account.student.firstname}} {{app.account.student.lastname}} </td> 
