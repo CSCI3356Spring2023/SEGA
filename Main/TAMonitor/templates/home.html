@@ -5,9 +5,7 @@
 <body>   
     {% block title %}Home{% endblock %}
     {% block content %}
-    {% if user.is_authenticated %}
-    Your email is used as your username. The email you registered with is <b>{{ user.email }}</b>
-        <p><a href="/logout">Log Out</a></p>
+    {% if user.is_authenticated %}  
     {% else %}
         <p>You are not logged in.</p>
         <a href="{%url 'login' %}" class="btn btn-primary">Log In in Here</a>
@@ -15,16 +13,14 @@
         <br>
         <a href="{%url 'register'%}"class="btn btn-primary">Register an account here</a>
     {% endif %}
-    {% if user.is_instructor %}
-        <p>You are registered as an instructor.</p>
+    {% if user.is_instructor %} 
         <a href="/createcourse" class="btn btn-primary">Create a course here</a>
         <br>
     {% endif %}
     {% if user.is_student %}
-        <p>You are registered as a student.</p> 
+        <p>You are registered as a student. Apply to some courses! </p> 
     {% endif %}
-    {% if user.is_admin or user.is_superuser %}
-        <p> You are registered as an admin </p>
+    {% if user.is_admin or user.is_superuser %} 
         <a href="/admin" class="btn btn-primary">View the admin panel here</a>
     {% endif %}
     {% if courses and user.is_student %}

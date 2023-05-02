@@ -21,9 +21,9 @@
         <img src="{% static 'images/bclogo.png' %}" alt="BC Logo" id="bclogo">
     </header>
     <h1 style="padding-left: 20px;">Boston College TA Application Portal</h1>
-    <button><a href="/">Home</a></button>  
+    <button><a href="/">Home</a></button>    
     {% if user.is_authenticated %} 
-        <p> Logged in as: <b>{{ user.email }}</b> </p>
+        <p> Logged in as: <b>{{ user.email }}</b></p> 
     {% if user.is_instructor %}
         <p>You are registered as an instructor.</p> 
     {% endif %}
@@ -32,8 +32,10 @@
     {% endif %} 
     {% if user.is_admin or user.is_superuser %}
         <p> You are registered as an admin </p> 
-    {% endif %}
     {% endif %} 
+        <button><a href="/logout">Log Out</a></button>  
+    {% endif %} 
+
     <main>
         {% block content %} 
         {% endblock %}
