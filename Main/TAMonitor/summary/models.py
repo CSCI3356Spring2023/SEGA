@@ -144,9 +144,9 @@ class Course(models.Model):
     Rooms       = models.CharField(max_length=255)
     Times       = models.CharField(max_length=255)
     TAs = models.IntegerField(null=True)
-    WithDiscussion = models.CharField(max_length=255)
-    GradedInMeeting = models.CharField(max_length=255)
-    OfficeHours = models.CharField(max_length=255, null=True)
+    WithDiscussion = models.BooleanField()
+    GradedInMeeting = models.BooleanField()
+    OfficeHours = models.IntegerField(null=True)
     ExtraInfo   = models.CharField(max_length=2056, null=True)
     Applications = models.ManyToManyField(Application, default='', blank=True)
 

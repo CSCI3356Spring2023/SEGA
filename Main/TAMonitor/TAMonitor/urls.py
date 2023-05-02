@@ -26,7 +26,9 @@ urlpatterns = [
     path('studentregister/', view.studentregister, name='studentregister'),
     path('instructorregister/', view.instructorregister, name='instructorregister'),
     path('adminregister/', view.adminregister, name='adminregister'),
-    path('createcourse/', view.createcourse, name='createcourse'),
+    # path('createcourse/', view.createcourse, name='createcourse'),
+    path('createcourse/', view.createcourse.as_view(success_url="/"), name='createcourse'),
+    path('courseupdate/<int:pk>', view.courseupdate.as_view(success_url="/"), name='courseupdate'),
     path('instructorsummary/', view.instructorsummary, name='instructorsummary'),
     path('apply/', view.apply, name='apply'),
 

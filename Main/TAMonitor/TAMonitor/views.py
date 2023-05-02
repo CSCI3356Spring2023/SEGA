@@ -4,7 +4,7 @@ from django.urls import path, include
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import CreateView
+from django.views.generic.edit import UpdateView, CreateView
 import os
 
 from .forms import StudentRegisterForm, InstructorRegisterForm, AdminRegisterForm, ApplicationForm, CreateCourseForm
@@ -57,17 +57,26 @@ def adminregister(request):
     context = {'form': form}
     return render(request, 'adminregister.html', context)
 
-def createcourse(request):
-    if request.method == 'POST':
-        form = CreateCourseForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-    else:
-        form = CreateCourseForm()
+# def createcourse(request):
+#     if request.method == 'POST':
+#         form = CreateCourseForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/')
+#     else:
+#         form = CreateCourseForm()
 
-    context = {'form': form}
-    return render(request, 'createcourse.html', context)
+#     context = {'form': form}
+#     return render(request, 'createcourse.html', context)
+
+class createcourse(CreateView):
+    model = Course
+    fields = "__all__"
+
+class courseupdate(UpdateView):
+    model = Course
+    fields = "__all__"
+    template_name_suffix = '_update_form'
 
 def instructorsummary(request):
     # Needs implementation

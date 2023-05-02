@@ -19,8 +19,6 @@
         <p>You are registered as an instructor.</p>
         <a href="/createcourse" class="btn btn-primary">Create a course here</a>
         <br>
-        <a href="/instructorsummary" class="btn btn-primary">View the Instructor Summary here</a>
-        <br>
     {% endif %}
     {% if user.is_student %}
         <p>You are registered as a student.</p> 
@@ -68,6 +66,50 @@
                 </table>
             </div>
         </div>
+
+
+        <!-- Instructor Summary -->
+    <!-- Probably better for a (non-superuser) admin panel -->
+     {% if courses and user.is_instructor %}
+        <div class="course-overview"> 
+            <div class="table">
+                <table class="table table-bordered table-hover table-striped table-condensed text-center">
+                    <div class="caption center-block text-center"> 
+                        Course Overview 
+                    </div>
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width:16.66%"><h4>Course ID</h4></th>
+                            <th scope="col" style="width:25%"><h4>Schedule</h4></th>
+                            <th scope="col" style="width:15%"><h4>Office Hours</h4></th>
+                            <th scope="col" style="width:15%"><h4>TAs</h4></th>
+                            <th scope="col" style="width:15%"><h4>Click to Edit</h4></th>
+                           
+                        </tr>
+                    </thead>
+                    <div class="caption center-block text-center">
+                        Number of courses: {{ courses|length }}
+                    </div>
+                    <tbody> 
+                        <tbody> 
+                            {% for course in courses %}
+                            <tr scope="row">
+                                <td>{{course.CourseID}}</td> 
+                                <td>{{course.Times}}</td> 
+                                <td>{{course.OfficeHours}}</td>
+                                <td>{{course.TAs}}</td>  
+                                <td><a href="{%url 'courseupdate' course.id %}">Edit</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        {% else %}
+                            <!-- User is not a student -->   
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
 
     {% if user.is_authenticated and user.is_admin %} 
     {% endif %}
