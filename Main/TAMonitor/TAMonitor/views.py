@@ -15,6 +15,10 @@ def home(response):
     courses = Course.objects.all()
     return render(response, 'home.html', {'courses':courses})
 
+def applicationoverview(response):
+    applications = Application.objects.all()
+    return render(response, 'allapplications.html', {'applications':applications})
+
 def logout_view(request):
     logout(request)
     return render(request, 'home.html')

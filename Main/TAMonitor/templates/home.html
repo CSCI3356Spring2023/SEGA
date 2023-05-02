@@ -83,10 +83,12 @@
                     <tr>
                         <th scope="col" style="width:16.66%"><h4>Course ID</h4></th>
                         <th scope="col" style="width:25%"><h4>Schedule</h4></th>
-                        <th scope="col" style="width:15%"><h4>Office Hours</h4></th>
+                        
                         <th scope="col" style="width:15%"><h4>TAs</h4></th>
                         <th scope="col" style="width:15%"><h4>Edit</h4></th>
                         <th scope="col" style="width:15%"><h4>Details</h4></th>
+
+                        <th scope="col" style="width:15%"><h4>View Applications</h4></th>
                        
                     </tr>
                 </thead> 
@@ -100,10 +102,10 @@
                         <tr scope="row">
                             <td>{{course.CourseID}}</td> 
                             <td>{{course.Times}}</td> 
-                            <td>{{course.OfficeHours}}</td>
                             <td>{{course.TAs}}</td>  
                             <td><a href="{%url 'courseupdate' course.id %}">Edit</a></td>
                             <td><a href="{% url 'coursedetail' course.id %}">Details</a></td>
+                            <td><a href="/allapplications">View Applications</a></td>
                         </tr>
                         {% endif %}
                         {% endfor %}
@@ -128,11 +130,11 @@
                     <thead>
                         <tr>
                             <th scope="col" style="width:16.66%"><h4>Course ID</h4></th>
-                            <th scope="col" style="width:25%"><h4>Schedule</h4></th>
-                            <th scope="col" style="width:15%"><h4>Office Hours</h4></th>
+                            <th scope="col" style="width:25%"><h4>Schedule</h4></th> 
                             <th scope="col" style="width:15%"><h4>TAs</h4></th>
-                            <th scope="col" style="width:15%"><h4>Click to Edit</h4></th>
+                            <th scope="col" style="width:15%"><h4>Edit</h4></th>
                             <th scope="col" style="width:15%"><h4>Details</h4></th>
+                            <th scope="col" style="width:15%"><h4>View Applications</h4></th>
                            
                         </tr>
                     </thead>
@@ -144,11 +146,11 @@
                             {% for course in courses %}
                             <tr scope="row">
                                 <td>{{course.CourseID}}</td> 
-                                <td>{{course.Times}}</td> 
-                                <td>{{course.OfficeHours}}</td>
+                                <td>{{course.Times}}</td>  
                                 <td>{{course.TAs}}</td>  
                                 <td><a href="{%url 'courseupdate' course.id %}">Edit</a></td>
                                 <td><a href="{% url 'coursedetail' course.id %}">Details</a></td>
+                                <td><a href="/allapplications">Applications</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>

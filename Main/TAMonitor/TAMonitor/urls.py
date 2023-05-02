@@ -33,6 +33,7 @@ urlpatterns = [
     path('courseupdate/<int:pk>', view.courseupdate.as_view(success_url="/"), name='courseupdate'),
     path('coursedetail/<int:pk>', view.coursedetailview.as_view(), name="coursedetail"),
     path('applictionview/<int:pk>', view.applicationview.as_view(), name="applicationview"),
+    path('allapplications/', view.applicationoverview, name="applicationoverview"),
     path('apply/', view.apply, name='apply'),
 
 ]
