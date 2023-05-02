@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views as view
 
 urlpatterns = [
@@ -30,6 +32,9 @@ urlpatterns = [
     path('createcourse/', view.createcourse.as_view(success_url="/"), name='createcourse'),
     path('courseupdate/<int:pk>', view.courseupdate.as_view(success_url="/"), name='courseupdate'),
     path('coursedetail/<int:pk>', view.coursedetailview.as_view(), name="coursedetail"),
+    path('applictionview/<int:pk>', view.applicationview.as_view(), name="applicationview"),
     path('apply/', view.apply, name='apply'),
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -25,7 +25,7 @@ class Application(models.Model):
     SelectedCourse = models.ForeignKey('Course', on_delete=models.CASCADE, primary_key=False)
     # SelectedCourse = models.CharField(max_length=255)
     Experience = models.CharField(max_length=4096)
-    Resume = models.FileField(default='', blank=True)
+    Resume = models.FileField(upload_to="resumes", default='', blank=True)
 
     STATUS_CHOICES = (
         ('Available', 'Available'),

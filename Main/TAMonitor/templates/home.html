@@ -86,8 +86,7 @@
                         <th scope="col" style="width:15%"><h4>Office Hours</h4></th>
                         <th scope="col" style="width:15%"><h4>TAs</h4></th>
                         <th scope="col" style="width:15%"><h4>Edit</h4></th>
-
-                            <th scope="col" style="width:15%"><h4>Details</h4></th>
+                        <th scope="col" style="width:15%"><h4>Details</h4></th>
                        
                     </tr>
                 </thead> 
@@ -119,7 +118,7 @@
 
     <!-- Admin Summary -->
     <!-- Able to edit all courses --> 
-     {% if courses and user.is_admin %}
+     {% if courses and user.is_admin or user.is_superuser %}
         <div class="course-overview"> 
             <div class="table">
                 <table class="table table-bordered table-hover table-striped table-condensed text-center">

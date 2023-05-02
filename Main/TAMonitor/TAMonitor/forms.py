@@ -123,9 +123,6 @@ class EditCourseForm(forms.Form):
         model = Course
         fields = ('CourseID', 'Name', 'Instructor', 'Description', 'SeatData', 'Rooms', 'Times', 'TAs', 'WithDiscussion', 'GradedInMeeting', 'ExtraInfo')
 
-
-
-
 class ApplicationForm(forms.ModelForm):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)

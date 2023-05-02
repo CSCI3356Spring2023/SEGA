@@ -70,6 +70,9 @@ class courseupdate(UpdateView):
 class coursedetailview(DetailView):
     model = Course
 
+class applicationview(DetailView):
+    model = Application
+
 class CreateApplication(CreateView):
     model = Application
     form_class = ApplicationForm()
@@ -97,7 +100,7 @@ def apply(response):
                     account = response.user,
                     SelectedCourse = course,
                     Experience = response.POST.get('experience'),
-                    Resume = response.POST.get('resume'),
+                    Resume = response.FILES['resume'],
                     )
             course.Applications.add(application)
             course.save()

@@ -8,7 +8,7 @@
 {% block content %}
 
 <div>
-  <form method='POST'>
+  <form method='POST' enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.selected_course | as_crispy_field }}
     <div class=>
