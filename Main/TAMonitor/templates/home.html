@@ -68,9 +68,53 @@
         </div>
 
 
-        <!-- Instructor Summary -->
-    <!-- Probably better for a (non-superuser) admin panel -->
-     {% if courses and user.is_instructor %}
+    <!-- Instructor Summary -->
+    <!-- Only able to see courses where they are the instructor -->
+    {% if courses and user.is_instructor %}    
+     <div class="course-overview"> 
+        <div class="table">
+            <table class="table table-bordered table-hover table-striped table-condensed text-center">
+                <div class="caption center-block text-center"> 
+                    Your Courses
+                </div>
+                <thead>
+                    <tr>
+                        <th scope="col" style="width:16.66%"><h4>Course ID</h4></th>
+                        <th scope="col" style="width:25%"><h4>Schedule</h4></th>
+                        <th scope="col" style="width:15%"><h4>Office Hours</h4></th>
+                        <th scope="col" style="width:15%"><h4>TAs</h4></th>
+                        <th scope="col" style="width:15%"><h4>Edit</h4></th>
+                       
+                    </tr>
+                </thead> 
+                <tbody> 
+                    <tbody> 
+                        {% for course in courses %}
+
+                        {% if course.Instructor|stringformat:"s" == user.email|stringformat:"s" %}
+                        <!-- <p> Course Instructor matches current user account </p> --> 
+                        <!-- List courses only where these match -->
+                        <tr scope="row">
+                            <td>{{course.CourseID}}</td> 
+                            <td>{{course.Times}}</td> 
+                            <td>{{course.OfficeHours}}</td>
+                            <td>{{course.TAs}}</td>  
+                            <td><a href="{%url 'courseupdate' course.id %}">Edit</a></td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                    {% else %}
+                        <!-- User is not a student -->   
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>               
+
+    <!-- Admin Summary -->
+    <!-- Able to edit all courses --> 
+     {% if courses and user.is_admin %}
         <div class="course-overview"> 
             <div class="table">
                 <table class="table table-bordered table-hover table-striped table-condensed text-center">
