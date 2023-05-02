@@ -29,8 +29,9 @@
                       Number of applications: {{ applications|length }}
                   </div>
                   <tbody> 
-                      <tbody> 
+                      <tbody>  
                           {% for app in applications %}
+                          {% if app.SelectedCourse.Instructor|stringformat:"s" == user.email|stringformat:"s" %}
                           <tr scope="row">
                               <td>{{app.account.email}}</td> 
                               <td>{{app.account.student.firstname}} {{app.account.student.lastname}} </td> 
@@ -38,6 +39,7 @@
                               <td><a href="{{ app.Resume.url }}">Resume</a></td>   
                               <td><a href="{% url 'applicationview' app.id %}">{{app.status}}</a></td>
                           </tr>
+                          {% endif %}
                           {% endfor %}
                       </tbody> 
                   </tbody>
