@@ -4,6 +4,10 @@
 
 {% block content %}
    
+        {% if user.is_student %}
+            You are a student and do not have permission to view this page.
+            <button><a href="/studentapplications">View your applications here</a></button>
+        {% endif %}
   
  
 
