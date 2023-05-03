@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Account, Course, Student, Instructor, Admin
+from .models import Account, Course, Student, Instructor, Admin, Application
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
@@ -29,5 +29,6 @@ admin.site.register(Student)
 admin.site.register(Instructor)
 admin.site.register(Admin)
 admin.site.register(Course)
+admin.site.register(Application)
 admin.site.unregister(Group)
 admin.site.site_header = "Boston College TA Application System Overview"
