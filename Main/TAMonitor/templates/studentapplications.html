@@ -16,6 +16,7 @@
                   <thead>
                       <tr>
                           <th scope="col" style="width:15%%"><h4>Course</h4></th>
+                          <th scope="col" style="width:15%%"><h4>Course Name</h4></th>
                           <th scope="col" style="width:15%"><h4>Instructor</h4></th>
                           <th scope="col" style="width:15%"><h4>Status</h4></th>
                          
@@ -30,6 +31,7 @@
                           {% for app in applications %}
                           <tr scope="row">
                               <td>{{app.SelectedCourse}}</td>
+                              <td>{{app.SelectedCourse.Name}}</td>
                               <td>{{app.SelectedCourse.Instructor}}</td>
                               <td>{{app.status}}</td>
                           </tr>
