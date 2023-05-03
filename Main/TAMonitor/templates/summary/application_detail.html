@@ -12,17 +12,19 @@
         <p>Student Experience: {{application.Experience}}</p>
         <p>Student Resume: <a href="{{ application.Resume.url }}">Download</a></p>
 
-        
-        <form action="{% url 'acceptapp' application.id %}" method="POST">
-        {% csrf_token %}
-            <button type="submit" class="btn btn-lg btn-warning">Accept</button>
-        </form>
-       
-        <form action="{% url 'rejectapp' application.id %}" method="POST">
-        {% csrf_token %}
-            <button type="submit" class="btn btn-lg btn-danger">Reject</button>
-        </form>
-       
+        <div class="content">
+            <div style="display: inline-block"></div>
+                <form action="{% url 'acceptapp' application.id %}" method="POST">
+                {% csrf_token %}
+                    <button type="submit" class="btn btn-lg btn-warning">Accept</button>
+                </form>
+
+                <form action="{% url 'rejectapp' application.id %}" method="POST">
+                {% csrf_token %}
+                    <button type="submit" class="btn btn-lg btn-danger">Reject</button>
+                </form>
+            </div>
+        </div>
         
         </div>
     </div>

@@ -18,7 +18,8 @@
         <br>
     {% endif %}
     {% if user.is_student %}
-        <p>You are registered as a student. Apply to some courses! </p> 
+        <p>You are registered as a student. Apply to some courses! </p>
+        <a href="/studentapplications" class="btn btn-primary">View your Applications</a>
     {% endif %}
     {% if user.is_admin or user.is_superuser %} 
         <a href="/admin" class="btn btn-primary">View the admin panel here</a>
@@ -35,7 +36,7 @@
                             <th scope="col" style="width:16.66%"><h4>Course ID</h4></th>
                             <th scope="col" style="width:25%"><h4>Schedule</h4></th>
                             <th scope="col" style="width:15%"><h4>Office Hours</h4></th>
-                            <th scope="col" style="width:15%"><h4>TAs</h4></th>
+                            <th scope="col" style="width:15%"><h4>TAs Required</h4></th>
                             <th scope="col" style="width:15%"><h4>Click to Apply</h4></th>
                             <th scope="col" style="width:15%"><h4>Details</h4></th>
                            
@@ -80,7 +81,7 @@
                         <th scope="col" style="width:16.66%"><h4>Course ID</h4></th>
                         <th scope="col" style="width:25%"><h4>Schedule</h4></th>
                         
-                        <th scope="col" style="width:15%"><h4>TAs</h4></th>
+                        <th scope="col" style="width:15%"><h4>TAs Required</h4></th>
                         <th scope="col" style="width:15%"><h4>Edit</h4></th>
                         <th scope="col" style="width:15%"><h4>Details</h4></th>
 
@@ -127,7 +128,7 @@
                         <tr>
                             <th scope="col" style="width:16.66%"><h4>Course ID</h4></th>
                             <th scope="col" style="width:25%"><h4>Schedule</h4></th> 
-                            <th scope="col" style="width:15%"><h4>TAs</h4></th>
+                            <th scope="col" style="width:15%"><h4>TAs Required</h4></th>
                             <th scope="col" style="width:15%"><h4>Edit</h4></th>
                             <th scope="col" style="width:15%"><h4>Details</h4></th>
                             <th scope="col" style="width:15%"><h4>View Applications</h4></th>
@@ -140,7 +141,7 @@
                     <tbody> 
                         <tbody> 
                             {% for course in courses %}
-                            <tr scope="row">
+                            <tr scope="r2ow">
                                 <td>{{course.CourseID}}</td> 
                                 <td>{{course.Times}}</td>  
                                 <td>{{course.TAs}}</td>  

@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib import admin
+from django.template.defaulttags import register
 from django.urls import path, include
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import UpdateView, CreateView
 from django.views.generic.detail import DetailView
+from django.contrib.auth.models import User
 import os
 
 from .forms import StudentRegisterForm, InstructorRegisterForm, AdminRegisterForm, ApplicationForm, CreateCourseForm
@@ -18,6 +21,15 @@ def home(response):
 def applicationoverview(response):
     applications = Application.objects.all()
     return render(response, 'allapplications.html', {'applications':applications})
+
+def studentapplicationsview(response):
+    user_email = response.user.email
+    applications = Application.objects.filter(account__email=user_email)
+    num_applications = len(applications)
+    args = {'applications': applications,
+            'user_email': user_email,
+            'num_applications': num_applications}
+    return render(response, 'studentapplications.html', args)
 
 def logout_view(request):
     logout(request)
@@ -98,6 +110,11 @@ def apply(response):
         course = Course.objects.get(pk=selected_course)
         apps = Application.objects.filter(account=user)
         app_count = len(apps)
+
+        if len(Application.objects.filter(account=user, SelectedCourse=selected_course)) > 0:
+            messages.info(response, 'You cannot apply to the same course twice!')
+
+            return redirect('/apply')
 
         if form.is_valid() and app_count < 5:
             application = Application.objects.create(
