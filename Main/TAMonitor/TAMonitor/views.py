@@ -10,6 +10,7 @@ from django.views.generic.edit import UpdateView, CreateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.models import User
 import os
+from django.core.mail import send_mail
 
 from .forms import StudentRegisterForm, InstructorRegisterForm, AdminRegisterForm, ApplicationForm, CreateCourseForm
 from summary.models import Account, Student, Instructor, Admin, Course, Application
@@ -142,11 +143,28 @@ def accept_application(request, pk):
     app = Application.objects.get(pk=pk)
     app.status = 'Accepted'
     app.save()
+
+    send_mail(
+    'View your offer',
+    f"Dear {app.account.email},\n\n"
+    f'Congratulations! Your TA application for {app.SelectedCourse.CourseID} has been accepted! Please check your student TA portal for further instructions. For assistance, please email bctaapp@gmail.com.',
+    'bctaapp@gmail.com',
+    [app.account.email],
+    fail_silently=False
+    )   
     return redirect('/allapplications')
 
 def reject_application(request, pk):
     app = Application.objects.get(pk=pk)
     app.status = 'Rejected'
     app.save()
+    send_mail(
+    f'Update regarding you TA application to {app.SelectedCourse.CourseID}',
+    f"Dear {app.account.email},\n\n"
+    f'Unfortunately, Your TA application for {app.SelectedCourse.CourseID} has been rejected. Thank you for your application! For assistance, please email bctaapp@gmail.com.',
+    'bctaapp@gmail.com',
+    [app.account.email],
+    fail_silently=False
+    ) 
     return redirect('/allapplications')
 
