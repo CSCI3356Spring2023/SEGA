@@ -5,21 +5,25 @@ from django.db import models
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
+from django.core.validators import RegexValidator
 
 from summary.models import Account, Student, Instructor, Admin, Course, Application
 
 class StudentRegisterForm(UserCreationForm):
-    firstname = forms.CharField()
-    lastname = forms.CharField()
+    firstname = forms.CharField(label="First name", max_length=100, required=True)
+    #firstname = forms.CharField()
+    lastname = forms.CharField(label="Last name", max_length=100, required=True)
+    #lastname = forms.CharField()
     email = forms.EmailField()
     major = forms.CharField()
     year_in_school = forms.ChoiceField(choices=Student.YEAR_IN_SCHOOL)
-    work = forms.ChoiceField(choices=Student.OPEN_TO_WORK)
-    eagleid = forms.CharField()
-
+    work = forms.ChoiceField(label='Are you available to work?', choices=Student.OPEN_TO_WORK)
+    #eagleid = forms.CharField()
+    eagleid = forms.CharField(label='Eagle ID', validators=[RegexValidator(r'^\d{8}$', message='Eagle ID must be an 8-digit number.')])
     class Meta:
         model = Account
         fields = ['email', 'firstname', 'lastname', 'major', 'year_in_school', 'eagleid']
+    
 
     def save(self):
         account = super().save(commit=False)
@@ -39,8 +43,10 @@ class StudentRegisterForm(UserCreationForm):
         return account
 
 class InstructorRegisterForm(UserCreationForm):
-    firstname = forms.CharField()
-    lastname = forms.CharField()
+    firstname = forms.CharField(label="First name", max_length=100, required=True)
+    #firstname = forms.CharField()
+    lastname = forms.CharField(label="Last name", max_length=100, required=True)
+    #lastname = forms.CharField()
     email = forms.EmailField()
     position = forms.CharField()
 
@@ -65,8 +71,10 @@ class InstructorRegisterForm(UserCreationForm):
 
 
 class AdminRegisterForm(UserCreationForm):
-    firstname = forms.CharField()
-    lastname = forms.CharField()
+    firstname = forms.CharField(label="First name", max_length=100, required=True)
+    #firstname = forms.CharField()
+    lastname = forms.CharField(label="Last name", max_length=100, required=True)
+    #lastname = forms.CharField()
     email = forms.EmailField()
     position = forms.CharField()
 

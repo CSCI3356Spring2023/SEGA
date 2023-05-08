@@ -167,4 +167,3 @@ def reject_application(request, pk):
     fail_silently=False
     ) 
     return redirect('/allapplications')
-
